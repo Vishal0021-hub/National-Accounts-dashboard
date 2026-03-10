@@ -1,2 +1,2231 @@
-# National-Accounts-dashboard
-A full-stack dashboard for visualizing National Accounts data using React and Node.js. Includes interactive charts, dataset management, REST APIs, and responsive UI. Built to practice economic data processing, backend analytics, and frontend visualization in a modern architecture.
+# 🇮🇳 National Accounts Dashboard - Full Stack MERN Application
+
+# 🇮🇳 National Accounts Dashboard - India Economic Data Platform
+
+[![Node.js](https://img.shields.io/badge/Node.js-16.x-green.svg)](https://nodejs.org/)
+[![React](https://img.shields.io/badge/React-18.x-blue.svg)](https://reactjs.org/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-6.x-green.svg)](https.mongodb.com/)
+[![Express](https://img.shields.io/badge/Express-4.x-lightgrey.svg)](https://expressjs.com/)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+A comprehensive full-stack dashboard application for monitoring, analyzing, and visualizing India's national economic indicators. Features complete user authentication, real Indian economic data, interactive visualizations, dark mode, PDF report generation, and email notifications.
+
+**Live Data Sources**: Ministry of Statistics (MoSPI), Reserve Bank of India (RBI), Department of Economic Affairs (DEA)
+
+---
+
+## 📋 Table of Contents
+
+- [Features](#-features)
+- [Tech Stack](#-tech-stack)
+- [Data Coverage](#-data-coverage)
+- [Project Structure](#-project-structure)
+- [Installation](#-installation)
+- [Environment Setup](#-environment-setup)
+- [Running the Application](#-running-the-application)
+- [API Documentation](#-api-documentation)
+- [Dashboard Pages](#-dashboard-pages)
+- [Data Sources](#-data-sources)
+- [Deployment](#-deployment)
+- [Troubleshooting](#-troubleshooting)
+- [Contributing](#-contributing)
+- [License](#-license)
+
+---
+
+## ✨ Features
+
+### 🔐 Authentication & User Management
+- ✅ **Multiple Authentication Methods**:
+  - Email/Password with JWT authentication
+  - Google OAuth 2.0 Sign-In (One-click authentication)
+  - Email OTP Verification (6-digit code, 10-minute expiry)
+- ✅ **3-Step Signup Process**:
+  - Step 1: Email verification with OTP
+  - Step 2: OTP validation (with resend functionality)
+  - Step 3: Complete profile registration
+- ✅ **Google Sign-In Features**:
+  - Automatic profile creation from Google account
+  - Profile picture integration
+  - Email pre-verified for Google users
+  - Profile completion flow for phone & organization
+- ✅ **Security Features**:
+  - Protected routes with middleware
+  - JWT token-based authentication
+  - bcrypt password hashing
+  - OTP rate limiting (60-second cooldown)
+  - Email uniqueness validation
+  - Session persistence
+- ✅ User profile management with real-time updates
+- ✅ Secure password change with validation
+
+### 📊 Comprehensive Economic Data Dashboard
+- ✅ **Dynamic Dashboard System**:
+  - Real-time data from MongoDB database
+  - Admin-controlled updates and statistics
+  - Live economic indicators feed
+- ✅ **Overview Dashboard**: 8 key Indian economic indicators with real-time data
+- ✅ **GDP Analysis**: Sectoral breakdown (Agriculture, Industry, Services)
+- ✅ **Fiscal Data**: Government budget, deficit tracking, debt analysis
+- ✅ **Trade & Balance of Payments**: Exports, imports, trade deficit analysis
+- ✅ **State-wise GDP**: Top 10 states ranking and per capita income
+- ✅ **Employment Statistics**: Labor force, unemployment trends
+- ✅ **Interactive Charts**: 15+ visualizations with Recharts (Line, Area, Bar, Pie)
+- ✅ **Recent Updates Feed**: Real-time activity tracking with database integration
+- ✅ **Admin Dashboard**: Create and manage economic updates (Admin-only access)
+
+### 📈 Real Indian Economic Data (FY 2018-19 to 2023-24)
+- ✅ GDP at Current & Constant Prices
+- ✅ Real GDP Growth Rates
+- ✅ Inflation metrics (CPI, food, fuel, core)
+- ✅ Fiscal indicators (deficits, debt)
+- ✅ Balance of Payments
+- ✅ Employment statistics
+- ✅ State-wise economic data
+- ✅ Sectoral contributions
+- ✅ Foreign exchange reserves
+- ✅ Trade data by category
+
+### ⚙️ Settings & Customization
+- ✅ **Profile Settings**: Update personal information (name, email, phone, organization)
+- ✅ **Security**: Change password with current password verification
+- ✅ **Notifications**: Configure 4 types of preferences
+  - Email Notifications
+  - Push Notifications
+  - Weekly Reports
+  - Data Updates
+- ✅ **Appearance**: Dark/Light mode toggle
+- ✅ **Theme Persistence**: Settings saved to database and localStorage
+
+### 📄 Comprehensive Report System
+- ✅ **Dynamic PDF Generation**: Professional reports with tables and multi-year analysis using PDFKit.
+- ✅ **8 Detailed Categories**: GDP, Inflation, Fiscal, Trade, Employment, State GDP, Banking, and Agriculture.
+- ✅ **Admin File Upload**: Admins can upload custom reports (PDF, Excel, CSV) up to 10MB.
+- ✅ **Advanced Filtering**: Categorize and filter reports by topic and time period.
+- ✅ **Admin Management**: Full CRUD capabilities for uploaded reports (Upload, View, Delete).
+- ✅ **Indian Number Formatting**: All generated reports use standard Indian numbering (Lakhs/Crores).
+
+### 📧 Contact & Communication
+- ✅ Contact form with Nodemailer integration
+- ✅ **Email Services**:
+  - OTP verification emails with beautiful HTML templates
+  - Admin notification emails
+  - User confirmation emails
+  - Resend OTP functionality with rate limiting
+- ✅ Form validation and error handling
+- ✅ FAQ section with common queries
+
+### 🎨 Modern UI/UX
+- ✅ Fully responsive design (Mobile, Tablet, Desktop)
+- ✅ Dark mode support across entire application
+- ✅ Modern gradient backgrounds
+- ✅ Smooth animations and transitions
+- ✅ Professional sidebar navigation
+- ✅ Toast notifications for user actions
+- ✅ Loading states and error messages
+- ✅ Accessible design with ARIA labels
+
+---
+
+## 🛠️ Tech Stack
+
+### Frontend
+- **React 18** - UI Library with hooks
+- **Vite** - Lightning-fast build tool and dev server
+- **React Router v6** - Client-side routing
+- **Tailwind CSS** - Utility-first CSS framework with dark mode
+- **Recharts** - Chart library for data visualization
+- **Lucide React** - Modern icon library
+- **Axios** - HTTP client for API calls
+- **@react-oauth/google** - Google OAuth integration
+- **jwt-decode** - JWT token decoding
+
+### Backend
+- **Node.js** - JavaScript runtime
+- **Express.js** - Web application framework
+- **MongoDB** - NoSQL database
+- **Mongoose** - MongoDB ODM with schema validation
+- **JWT** - JSON Web Tokens for authentication
+- **bcryptjs** - Password hashing and encryption
+- **Nodemailer** - Email sending functionality (OTP & contact emails)
+- **PDFKit** - Dynamic PDF generation
+- **Multer** - Middleware for handling multipart/form-data (file uploads)
+- **CORS** - Cross-origin resource sharing
+- **Crypto** - Secure OTP generation
+
+---
+
+## 📊 Data Coverage
+
+### Economic Indicators (FY 2018-19 to 2023-24)
+
+#### GDP Metrics
+- GDP at Current Prices: ₹295.99 Lakh Crore (FY24)
+- GDP at Constant Prices (Base: 2011-12)
+- Real GDP Growth: 8.2% (FY24)
+- Per Capita Income: ₹2,06,403 (FY24)
+- Sectoral Breakdown:
+  - Agriculture & Allied: 18.2%
+  - Industry: 25.9%
+  - Services: 55.9%
+
+#### Inflation Data
+- Consumer Price Index (CPI): 5.4% (FY24)
+- Food Inflation: 6.6%
+- Fuel & Light: 3.8%
+- Core Inflation: 4.9%
+
+#### Fiscal Indicators
+- Fiscal Deficit: 5.9% of GDP (FY24)
+- Revenue Deficit: 2.8% of GDP
+- Primary Deficit: 1.7% of GDP
+- Total Public Debt: 81.5% of GDP
+
+#### Trade Statistics
+- Merchandise Exports: $437 Billion (FY24)
+- Merchandise Imports: $677 Billion
+- Trade Deficit: $240 Billion
+- Current Account Deficit: 1.2% of GDP
+- Foreign Exchange Reserves: $645.58 Billion
+
+#### Employment Data
+- Labor Force: 52.4 Crore
+- Employed: 49.2 Crore
+- Unemployment Rate: 6.1% (FY24)
+- Labor Force Participation Rate: 46.8%
+
+#### Banking & Financial Sector
+- Gross NPA Ratio: 3.9% (Scheduled Commercial Banks)
+- Net NPA Ratio: 1.0%
+- Capital Adequacy Ratio (CRAR): 16.8%
+- Credit-Deposit (CD) Ratio: 75.8%
+- Total Bank Deposits: ₹205.2 Lakh Crore
+
+#### Agriculture Production
+- Total Foodgrain Production: 329.7 Million Tonnes
+- Rice Production: 135.5 Million Tonnes
+- Wheat Production: 112.2 Million Tonnes
+- Pulses Production: 27.5 Million Tonnes
+- Sugarcane Production: 442.3 Million Tonnes
+
+#### State-wise GDP (Top 10)
+1. Maharashtra: ₹36.24 Lakh Crore (13.3% share)
+2. Tamil Nadu: ₹24.25 Lakh Crore (8.9%)
+3. Gujarat: ₹21.43 Lakh Crore (7.9%)
+4. Karnataka: ₹21.03 Lakh Crore (7.7%)
+5. Uttar Pradesh: ₹20.87 Lakh Crore (7.7%)
+6. West Bengal, Rajasthan, Andhra Pradesh, Telangana, Madhya Pradesh
+
+---
+
+## 📁 Project Structure
+
+```
+national-accounts-dashboard/
+├── client/                              # Frontend (React + Vite)
+│   ├── public/
+│   │   └── favicon.ico
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── DashboardLayout.jsx          # Sidebar + main layout
+│   │   │   ├── StatsCard.jsx                # Reusable metric cards
+│   │   │   ├── OverviewChart.jsx            # Chart component (Recharts)
+│   │   │   ├── RecentUpdates.jsx            # Activity feed widget
+│   │   │   ├── Navbar.jsx                   # Top navigation bar
+│   │   │   └── ProtectedRoute.jsx           # Route authentication guard
+│   │   ├── pages/
+│   │   │   ├── Home.jsx                     # Landing page
+│   │   │   ├── Login.jsx                    # Login page (Email + Google)
+│   │   │   ├── Signup.jsx                   # 3-step registration (OTP + Profile)
+│   │   │   ├── CompleteProfile.jsx          # Google user profile completion
+│   │   │   ├── Dashboard.jsx                # Main overview dashboard
+│   │   │   ├── GDPAnalysis.jsx              # GDP detailed analysis
+│   │   │   ├── FiscalData.jsx               # Fiscal metrics & budget
+│   │   │   ├── TradeData.jsx                # Trade & BoP analysis
+│   │   │   ├── StateGDP.jsx                 # State-wise GDP rankings
+│   │   │   ├── Employment.jsx               # Employment statistics
+│   │   │   ├── Reports.jsx                  # PDF report downloads
+│   │   │   ├── Settings.jsx                 # User settings (4 tabs)
+│   │   │   └── ContactUs.jsx                # Contact form with email
+│   │   ├── context/
+│   │   │   ├── AuthContext.jsx              # Auth state management
+│   │   │   └── ThemeContext.jsx             # Dark mode management
+│   │   ├── services/
+│   │   │   └── api.js                       # Axios API calls
+│   │   ├── data/
+│   │   │   ├── dashboardData.js             # Legacy dummy data
+│   │   │   └── realIndiaData.js             # Real Indian economic data
+│   │   ├── App.jsx                          # Main app component
+│   │   ├── main.jsx                         # React entry point
+│   │   └── index.css                        # Global styles + Tailwind
+│   ├── .env                                 # Frontend environment variables
+│   ├── package.json
+│   ├── tailwind.config.js                   # Tailwind configuration
+│   ├── vite.config.js                       # Vite configuration
+│   └── vercel.json                          # Vercel deployment config
+│
+└── server/                              # Backend (Node.js + Express)
+    ├── config/
+    │   └── db.js                            # MongoDB connection
+    ├── models/
+    │   ├── User.js                          # User schema with Google OAuth support
+    │   ├── OTP.js                           # OTP verification schema
+    │   ├── Update.js                        # Dashboard updates schema
+    │   ├── EconomicData.js                  # Economic statistics schema
+    │   └── Report.js                        # Report metadata schema (NEW)
+    ├── data/
+    │   └── economicData.js                  # Pre-configured Indian economic data (NEW)
+    ├── routes/
+    │   ├── auth.js                          # Authentication routes (Email, Google, OTP)
+    │   ├── user.js                          # User management routes
+    │   ├── contact.js                       # Contact form route
+    │   ├── reports.js                       # Report download & upload routes
+    │   └── dashboard.js                     # Dashboard updates & stats routes
+    ├── middleware/
+    │   ├── auth.js                          # JWT verification middleware
+    │   └── upload.js                        # Multer file upload configuration (NEW)
+    ├── controllers/
+    │   ├── authController.js                # Auth logic (signup, login)
+    │   ├── googleAuthController.js          # Google OAuth authentication
+    │   ├── otpController.js                 # OTP generation & verification
+    │   ├── userController.js                # Profile/preferences updates
+    │   ├── contactController.js             # Email sending logic
+    │   ├── reportController.js              # Comprehensive PDF generation (8 topics)
+    │   └── dashboardController.js           # Dashboard updates & stats management
+    ├── uploads/                             # User uploaded reports (NEW)
+    │   └── reports/                         # PDF/Excel/CSV file storage
+    ├── .env                                 # Backend environment variables
+    ├── package.json
+    └── server.js                            # Express server entry point
+```
+
+---
+
+## 🚀 Installation
+
+### Prerequisites
+- **Node.js** v16 or higher ([Download](https://nodejs.org/))
+- **MongoDB Atlas** account (free tier available) ([Sign up](https://www.mongodb.com/cloud/atlas))
+- **Git** ([Download](https://git-scm.com/))
+- **Gmail account** (for email features) or alternative email service
+
+### Step 1: Clone Repository
+
+```bash
+git clone <your-repository-url>
+cd national-accounts-dashboard
+```
+
+### Step 2: Backend Setup
+
+```bash
+# Navigate to server folder
+cd server
+
+# Install dependencies
+npm install
+```
+
+**Packages installed:**
+- express, mongoose, bcryptjs, jsonwebtoken, dotenv, cors
+- nodemailer (email), pdfkit (PDF generation)
+- multer (file uploads), crypto (OTP generation)
+
+**Update package.json scripts:**
+```json
+"scripts": {
+  "start": "node server.js",
+  "dev": "nodemon server.js"
+}
+```
+
+### Step 3: Frontend Setup
+
+```bash
+# Navigate to client folder (from root)
+cd ../client
+
+# Install dependencies
+npm install
+```
+
+**Packages installed:**
+- react, react-router-dom, axios
+- recharts (charts), lucide-react (icons)
+- tailwindcss (styling)
+- @react-oauth/google (Google OAuth), jwt-decode (JWT decoding)
+
+---
+
+## 🔐 Environment Setup
+
+### Backend Environment Variables
+
+Create `server/.env` file:
+
+```env
+# Server Configuration
+PORT=5000
+NODE_ENV=development
+
+# MongoDB Configuration
+MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/national-accounts?retryWrites=true&w=majority
+
+# JWT Configuration (use strong random string, min 32 characters)
+JWT_SECRET=your_super_secret_jwt_key_at_least_32_characters_long_change_this
+
+# Email Configuration (Gmail Example - for OTP & Contact emails)
+EMAIL_USER=your-email@gmail.com
+EMAIL_PASS=your-16-character-app-password
+ADMIN_EMAIL=admin@nationalaccounts.gov.in
+
+# Google OAuth Configuration
+GOOGLE_CLIENT_ID=your_google_client_id.apps.googleusercontent.com
+GOOGLE_CLIENT_SECRET=your_google_client_secret
+```
+
+### Frontend Environment Variables
+
+Create `client/.env` file:
+
+```env
+# API Base URL
+VITE_API_URL=http://localhost:5000/api
+
+# Google OAuth Client ID
+VITE_GOOGLE_CLIENT_ID=your_google_client_id.apps.googleusercontent.com
+```
+
+### MongoDB Atlas Setup (Free Tier)
+
+1. **Create Account**: 
+   - Go to [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)
+   - Sign up for free account
+
+2. **Create Cluster**:
+   - Choose FREE tier (M0 Sandbox)
+   - Select region (preferably closest to you)
+   - Name your cluster
+
+3. **Database Access**:
+   - Create database user with username and password
+   - Note down credentials
+
+4. **Network Access**:
+   - Add IP Address: `0.0.0.0/0` (allow from anywhere)
+   - Or add your specific IP address
+
+5. **Connect**:
+   - Click "Connect" on your cluster
+   - Choose "Connect your application"
+   - Copy connection string
+   - Replace `<username>`, `<password>`, and database name
+   - Paste in `MONGODB_URI` in `.env`
+
+### Gmail Setup for Email Features
+
+1. **Enable 2-Factor Authentication**:
+   - Go to Google Account → Security
+   - Enable 2-Step Verification
+
+2. **Generate App Password**:
+   - Security → 2-Step Verification → App passwords
+   - Select "Mail" and "Other (Custom name)"
+   - Enter "National Accounts Dashboard"
+   - Copy the 16-character password
+   - Use this in `EMAIL_PASS` in `.env`
+
+**⚠️ Important**: Never use your actual Gmail password. Always use App Passwords.
+
+**Alternative Email Services**:
+- **SendGrid**: Professional email service with free tier
+- **Mailgun**: Reliable email API
+- **AWS SES**: Amazon's email service
+
+---
+
+## ▶️ Running the Application
+
+### Development Mode
+
+Open two terminal windows:
+
+**Terminal 1 - Backend:**
+```bash
+cd server
+npm run dev
+
+# Output:
+# Server running on port 5000
+# MongoDB Connected: cluster0.xxxxx.mongodb.net
+```
+
+**Terminal 2 - Frontend:**
+```bash
+cd client
+npm run dev
+
+# Output:
+# VITE ready in 500 ms
+# ➜ Local: http://localhost:3000
+# ➜ Network: use --host to expose
+```
+
+**Access the application**: Open browser and go to `http://localhost:3000`
+
+### Production Build
+
+**Frontend:**
+```bash
+cd client
+npm run build
+# Creates optimized build in dist/ folder
+```
+
+**Backend:**
+```bash
+cd server
+npm start
+# Runs with node (production mode)
+```
+
+---
+
+## 📡 API Documentation
+
+### Base URL
+```
+Development: http://localhost:5000/api
+Production: https://your-backend-domain.com/api
+```
+
+### Authentication Endpoints
+
+#### 1. User Registration
+```http
+POST /api/auth/signup
+Content-Type: application/json
+
+Request Body:
+{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "phone": "+91 1234567890",
+  "organization": "Tech Corp",
+  "password": "securepass123"
+}
+
+Response (201 Created):
+{
+  "_id": "64abc123def456...",
+  "name": "John Doe",
+  "email": "john@example.com",
+  "phone": "+91 1234567890",
+  "organization": "Tech Corp",
+  "role": "user",
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+}
+```
+
+#### 2. User Login
+```http
+POST /api/auth/login
+Content-Type: application/json
+
+Request Body:
+{
+  "email": "john@example.com",
+  "password": "securepass123"
+}
+
+Response (200 OK):
+{
+  "_id": "64abc123def456...",
+  "name": "John Doe",
+  "email": "john@example.com",
+  "phone": "+91 1234567890",
+  "organization": "Tech Corp",
+  "role": "user",
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+}
+```
+
+#### 3. Get Current User
+```http
+GET /api/auth/me
+Authorization: Bearer {token}
+
+Response (200 OK):
+{
+  "_id": "64abc123def456...",
+  "name": "John Doe",
+  "email": "john@example.com",
+  "phone": "+91 1234567890",
+  "organization": "Tech Corp",
+  "role": "user",
+  "googleId": "optional_google_id",
+  "profilePicture": "optional_picture_url",
+  "emailVerified": true,
+  "preferences": {
+    "notifications": { ... },
+    "appearance": { ... }
+  }
+}
+```
+
+#### 4. Send OTP for Email Verification
+```http
+POST /api/auth/send-otp
+Content-Type: application/json
+
+Request Body:
+{
+  "email": "john@example.com"
+}
+
+Response (200 OK):
+{
+  "message": "OTP sent successfully to your email",
+  "email": "john@example.com"
+}
+```
+
+#### 5. Verify OTP
+```http
+POST /api/auth/verify-otp
+Content-Type: application/json
+
+Request Body:
+{
+  "email": "john@example.com",
+  "otp": "123456"
+}
+
+Response (200 OK):
+{
+  "message": "Email verified successfully",
+  "verified": true,
+  "email": "john@example.com"
+}
+```
+
+#### 6. Resend OTP
+```http
+POST /api/auth/resend-otp
+Content-Type: application/json
+
+Request Body:
+{
+  "email": "john@example.com"
+}
+
+Response (200 OK):
+{
+  "message": "New OTP sent successfully",
+  "email": "john@example.com"
+}
+```
+
+#### 7. Google OAuth Authentication
+```http
+POST /api/auth/google
+Content-Type: application/json
+
+Request Body:
+{
+  "email": "john@gmail.com",
+  "name": "John Doe",
+  "googleId": "google_user_id",
+  "picture": "profile_picture_url"
+}
+
+Response (200 OK or 201 Created):
+{
+  "_id": "64abc123def456...",
+  "name": "John Doe",
+  "email": "john@gmail.com",
+  "phone": "",
+  "organization": "",
+  "role": "user",
+  "googleId": "google_user_id",
+  "profilePicture": "profile_picture_url",
+  "emailVerified": true,
+  "isComplete": false,
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+}
+```
+
+#### 8. Complete Google User Profile
+```http
+PUT /api/auth/google/complete
+Authorization: Bearer {token}
+Content-Type: application/json
+
+Request Body:
+{
+  "phone": "+91 1234567890",
+  "organization": "Tech Corp"
+}
+
+Response (200 OK):
+{
+  "_id": "64abc123def456...",
+  "name": "John Doe",
+  "email": "john@gmail.com",
+  "phone": "+91 1234567890",
+  "organization": "Tech Corp",
+  "role": "user",
+  "googleId": "google_user_id",
+  "profilePicture": "profile_picture_url",
+  "isComplete": true
+}
+```
+
+### Dashboard Endpoints
+
+#### 9. Get Recent Updates
+```http
+GET /api/dashboard/updates
+
+Response (200 OK):
+[
+  {
+    "_id": "update_id",
+    "title": "GDP Growth Revised",
+    "description": "Q4 GDP growth revised to 8.2%",
+    "type": "success",
+    "category": "GDP",
+    "value": "8.2%",
+    "change": "+0.3%",
+    "timestamp": "2024-12-24T10:00:00.000Z"
+  }
+]
+```
+
+#### 10. Create Update (Admin Only)
+```http
+POST /api/dashboard/updates
+Authorization: Bearer {admin_token}
+Content-Type: application/json
+
+Request Body:
+{
+  "title": "GDP Growth Revised",
+  "description": "Q4 GDP growth revised to 8.2%",
+  "type": "success",
+  "category": "GDP",
+  "value": "8.2%",
+  "change": "+0.3%"
+}
+
+Response (201 Created):
+{
+  "_id": "update_id",
+  "title": "GDP Growth Revised",
+  ...
+}
+```
+
+#### 11. Get Dashboard Stats
+```http
+GET /api/dashboard/stats
+
+Response (200 OK):
+{
+  "gdp": { ... },
+  "inflation": { ... },
+  "fiscal": { ... },
+  ...
+}
+```
+
+#### 12. Update Dashboard Stats (Admin Only)
+```http
+PUT /api/dashboard/stats
+Authorization: Bearer {admin_token}
+Content-Type: application/json
+
+Request Body:
+{
+  "gdp": { "value": "295.99", "growth": "8.2" },
+  ...
+}
+
+Response (200 OK):
+{
+  "gdp": { "value": "295.99", "growth": "8.2" },
+  ...
+}
+```
+
+### User Management Endpoints
+
+#### 13. Update Profile
+```http
+PUT /api/user/profile
+Authorization: Bearer {token}
+Content-Type: application/json
+
+Request Body:
+{
+  "name": "Jane Doe",
+  "email": "jane@example.com",
+  "phone": "+91 9876543210",
+  "organization": "New Company"
+}
+
+Response (200 OK):
+{
+  "_id": "64abc123def456...",
+  "name": "Jane Doe",
+  "email": "jane@example.com",
+  "phone": "+91 9876543210",
+  "organization": "New Company",
+  "role": "user",
+  "preferences": { ... }
+}
+```
+
+#### 14. Change Password
+```http
+PUT /api/user/password
+Authorization: Bearer {token}
+Content-Type: application/json
+
+Request Body:
+{
+  "currentPassword": "oldpass123",
+  "newPassword": "newpass456"
+}
+
+Response (200 OK):
+{
+  "message": "Password changed successfully"
+}
+```
+
+#### 15. Update Preferences
+```http
+PUT /api/user/preferences
+Authorization: Bearer {token}
+Content-Type: application/json
+
+Request Body:
+{
+  "notifications": {
+    "emailNotifications": true,
+    "pushNotifications": false,
+    "weeklyReport": true,
+    "dataUpdates": true
+  },
+  "appearance": {
+    "darkMode": true
+  }
+}
+
+Response (200 OK):
+{
+  "message": "Preferences updated successfully",
+  "preferences": { ... }
+}
+```
+
+### Contact Endpoint
+
+#### 16. Send Contact Message
+```http
+POST /api/contact
+Content-Type: application/json
+
+Request Body:
+{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "subject": "Data inquiry",
+  "message": "I would like to know more about..."
+}
+
+Response (200 OK):
+{
+  "message": "Message sent successfully"
+}
+```
+
+### Reports Endpoint
+
+#### 17. Get All Reports
+```http
+GET /api/reports
+
+Response (200 OK):
+[
+  {
+    "_id": "report_id",
+    "title": "Q4 Summary",
+    "type": "uploaded",
+    "category": "General",
+    "fileUrl": "filename.pdf"
+  }
+]
+```
+
+#### 18. Download PDF Report
+```http
+GET /api/reports/download/{reportId}
+Authorization: Bearer {token}
+
+Response: PDF file (application/pdf)
+```
+
+#### 19. Upload Report (Admin Only)
+```http
+POST /api/reports/upload
+Authorization: Bearer {admin_token}
+Content-Type: multipart/form-data
+
+Request Body (FormData):
+- file: binary
+- title: string
+- description: string
+- category: string
+```
+
+#### 20. Delete Report (Admin Only)
+```http
+DELETE /api/reports/{id}
+Authorization: Bearer {admin_token}
+```
+
+---
+
+## 🗺️ Dashboard Pages
+
+### 1. Overview Dashboard (`/dashboard`)
+**8 Key Metric Cards:**
+- GDP at Current Prices
+- GDP Growth Rate
+- Inflation (CPI)
+- Fiscal Deficit
+- Per Capita Income
+- Unemployment Rate
+- Forex Reserves
+- Merchandise Exports
+
+**4 Interactive Charts:**
+- Real GDP at Constant Prices (Area)
+- GDP Growth Rate (Line)
+- CPI Inflation Rate (Line)
+- Fiscal Deficit (Area)
+
+**Recent Updates Feed**: Latest 5 economic updates
+
+### 2. GDP Analysis (`/dashboard/gdp`)
+**Features:**
+- 3 Sectoral contribution cards
+- GDP value trends (Lakh Crore Rs.)
+- Year-on-year growth rates
+- Historical data from FY 2018-19 to 2023-24
+
+**Data Breakdown:**
+- Agriculture & Allied: 18.2% of GVA
+- Industry: 25.9% of GVA
+- Services: 55.9% of GVA
+
+### 3. Fiscal Data (`/dashboard/fiscal`)
+**Features:**
+- 4 Fiscal indicator cards
+- Fiscal deficit trend chart
+- Key highlights and insights
+
+**Metrics:**
+- Fiscal Deficit: 5.9% of GDP
+- Revenue Deficit: 2.8% of GDP
+- Primary Deficit: 1.7% of GDP
+- Total Debt: 81.5% of GDP
+
+### 4. Trade & Balance of Payments (`/dashboard/trade`)
+**Features:**
+- 4 Trade metric cards
+- Exports/Imports bar chart
+- Export composition pie chart
+- Import composition pie chart
+- Key trade insights
+
+**Data:**
+- Exports: $437 Billion
+- Imports: $677 Billion
+- Trade Deficit: $240 Billion
+- Current Account Deficit: $36 Billion (1.2% of GDP)
+
+### 5. State-wise GDP (`/dashboard/states`)
+**Features:**
+- Top 10 states horizontal bar chart
+- State GDP contribution table
+- Per capita income ranking table
+- State economic insights
+
+**Top States:**
+- Maharashtra leads with 13.3% share
+- Top 10 states contribute 63% of GDP
+- Per capita leaders: Goa, Delhi, Sikkim
+
+### 6. Employment Statistics (`/dashboard/employment`)
+**Features:**
+- 4 Employment metric cards
+- Unemployment trend chart
+- Labor force growth chart
+- Employment statistics table
+- Sectoral employment insights
+
+**Data:**
+- Labor Force: 52.4 Crore
+- Employed: 49.2 Crore
+- Unemployment Rate: 6.1%
+- LFPR: 46.8%
+
+### 7. Reports (`/dashboard/reports`)
+**Features:**
+- **Dynamic PDF Generation**: 8 pre-configured categories with rich multi-year data.
+- **Admin Upload Interface**: Upload custom PDF, Excel, or CSV files with real-time feedback.
+- **Advanced Filtering**: Categorize reports by topic (GDP, Banking, etc.) and time period.
+- **Admin Management**: circular trash icon for easy deletion of uploaded resources.
+- **Statistics Dashboard**: Real-time counts of total, generated, and uploaded reports.
+
+**Available Generated Reports:**
+- **GDP Report**: Growth rates and sectoral breakdown.
+- **Inflation Analysis**: CPI, food, and core inflation trends.
+- **Fiscal Deficit Report**: Deficits, debt, and revenue analysis.
+- **Trade Balance Report**: Export-import and BoP data.
+- **Employment Statistics**: Unemployment and labor force trends.
+- **State-wise GDP Report**: State rankings and Regional analysis.
+- **Banking Sector Report**: NPA ratios and capital adequacy.
+- **Agriculture Production**: Foodgrain and crop-wise statistics.
+
+### 8. Settings (`/dashboard/settings`)
+**4 Tabs:**
+
+**Profile Tab:**
+- Update name, email, phone, organization
+- Real-time validation
+- Success notifications
+
+**Security Tab:**
+- Change password
+- Current password verification
+- Two-factor authentication (placeholder)
+
+**Notifications Tab:**
+- Email Notifications toggle
+- Push Notifications toggle
+- Weekly Reports toggle
+- Data Updates toggle
+
+**Appearance Tab:**
+- Dark Mode toggle
+- Theme persistence
+
+### 9. Contact (`/contact`)
+**Features:**
+- Contact form with validation
+- 4 Contact info cards
+- FAQ section
+- Map placeholder
+- Email sending integration
+
+---
+
+## 📚 Data Sources
+
+All data is compiled from official Government of India sources:
+
+### Primary Sources
+
+1. **Ministry of Statistics and Programme Implementation (MoSPI)**
+   - Website: [mospi.gov.in](https://mospi.gov.in)
+   - Data: National Accounts Statistics, GDP, Sectoral data
+   - Frequency: Quarterly and Annual
+
+2. **Reserve Bank of India (RBI)**
+   - Website: [rbi.org.in](https://rbi.org.in)
+   - Data: Monetary policy, Forex reserves, Banking data, BoP
+   - Frequency: Monthly and Quarterly
+
+3. **Department of Economic Affairs (DEA)**
+   - Website: [dea.gov.in](https://dea.gov.in)
+   - Data: Budget documents, Fiscal deficit, Government finances
+   - Frequency: Annual and Monthly
+
+4. **Directorate General of Commercial Intelligence and Statistics**
+   - Website: [commerce.gov.in](https://commerce.gov.in)
+   - Data: Trade statistics, Export-Import data
+   - Frequency: Monthly
+
+5. **Labour Bureau, Ministry of Labour**
+   - Website: [labour.gov.in](https://labour.gov.in)
+   - Data: Employment statistics, Labor force surveys
+   - Frequency: Quarterly
+
+### Data Accuracy & Disclaimer
+
+**All data in this dashboard:**
+- ✅ Sourced from official Government of India publications
+- ✅ Publicly available information
+- ✅ Updated as of FY 2023-24 (latest available)
+- ✅ Suitable for educational, research, and analytical purposes
+
+**For official use:**
+- Always refer to original government sources
+- Check for latest revisions and provisional estimates
+- Verify data before making financial or policy decisions
+- Note that some data may be provisional and subject to revision
+
+---
+
+## 🌐 Deployment
+
+### Backend Deployment
+
+#### Option 1: Railway (Recommended)
+
+1. **Install Railway CLI**:
+```bash
+npm install -g @railway/cli
+```
+
+2. **Login and Deploy**:
+```bash
+cd server
+railway login
+railway init
+railway up
+```
+
+3. **Set Environment Variables** in Railway Dashboard:
+```env
+PORT=5000
+MONGODB_URI=your_production_mongodb_uri
+JWT_SECRET=your_production_jwt_secret
+EMAIL_USER=your_email@gmail.com
+EMAIL_PASS=your_app_password
+ADMIN_EMAIL=admin@domain.com
+NODE_ENV=production
+```
+
+4. **Get Deployment URL**: Railway provides automatic URL
+
+#### Option 2: Render
+
+1. Go to [Render.com](https://render.com)
+2. Create New Web Service
+3. Connect GitHub repository
+4. Configure:
+   - **Name**: national-accounts-api
+   - **Root Directory**: `server`
+   - **Environment**: Node
+   - **Build Command**: `npm install`
+   - **Start Command**: `npm start`
+5. Add environment variables (same as above)
+6. Deploy
+
+### Frontend Deployment
+
+#### Vercel (Recommended)
+
+**Method 1: Vercel CLI**
+```bash
+# Install Vercel CLI
+npm install -g vercel
+
+# Login
+vercel login
+
+# Deploy
+cd client
+vercel
+```
+
+**Method 2: Vercel Dashboard**
+
+1. Go to [Vercel.com](https://vercel.com)
+2. Import Git Repository
+3. Configure:
+   - **Framework Preset**: Vite
+   - **Root Directory**: `client`
+   - **Build Command**: `npm run build`
+   - **Output Directory**: `dist`
+4. Add Environment Variable:
+   ```env
+   VITE_API_URL=https://your-backend-url.railway.app/api
+   ```
+5. Deploy
+
+### Post-Deployment Checklist
+
+- [ ] Backend deployed and accessible
+- [ ] Frontend deployed and accessible
+- [ ] Environment variables configured correctly
+- [ ] MongoDB connection working
+- [ ] Email sending functional
+- [ ] CORS configured for production URLs
+- [ ] HTTPS enabled on both frontend and backend
+- [ ] Test all API endpoints
+- [ ] Test authentication flow
+- [ ] Test PDF downloads (Generated reports)
+- [ ] Test Report Upload (Admin) - Verify file appears in list
+- [ ] Test Report Delete (Admin) - Verify physical file is removed
+- [ ] Test contact form emails
+- [ ] Test dark mode
+- [ ] Verify all dashboard pages load
+- [ ] Test mobile responsiveness
+
+---
+
+## 🐛 Troubleshooting
+
+### Common Issues & Solutions
+
+#### 1. MongoDB Connection Failed
+
+**Symptoms:**
+```
+MongooseServerSelectionError: connect ETIMEDOUT
+```
+
+**Solutions:**
+- ✅ Verify `MONGODB_URI` is correct in `.env`
+- ✅ Check Network Access in MongoDB Atlas (whitelist `0.0.0.0/0`)
+- ✅ Ensure database user credentials are correct
+- ✅ Verify cluster is running (not paused)
+- ✅ Check if VPN/firewall is blocking connection
+
+#### 2. JWT Token Errors
+
+**Symptoms:**
+```
+JsonWebTokenError: invalid signature
+Not authorized, token failed
+```
+
+**Solutions:**
+- ✅ Ensure `JWT_SECRET` is same in `.env` across restarts
+- ✅ Check token is being sent in Authorization header
+- ✅ Verify token format: `Bearer <token>`
+- ✅ Token may have expired (default 30 days)
+- ✅ Clear localStorage and login again
+
+#### 3. Email Not Sending
+
+**Symptoms:**
+- Contact form submits but no email received
+- Error in server console
+
+**Solutions:**
+- ✅ Verify Gmail 2FA is enabled
+- ✅ Use App Password, not regular Gmail password
+- ✅ Check `EMAIL_USER` and `EMAIL_PASS` are correct in `.env`
+- ✅ Ensure less secure app access is NOT needed (use App Passwords instead)
+- ✅ Try alternative email service (SendGrid, Mailgun)
+- ✅ Check Gmail inbox and spam folder
+
+#### 4. PDF Download Not Working
+
+**Symptoms:**
+- Click download but nothing happens
+- Error in browser console
+
+**Solutions:**
+- ✅ Verify PDFKit is installed: `npm list pdfkit`
+- ✅ Check backend route is accessible
+- ✅ Disable browser popup blocker
+- ✅ Check server console for PDF generation errors
+- ✅ Ensure user is authenticated (valid token)
+- ✅ Try different browser
+
+#### 5. Report Upload Failing (No file uploaded)
+
+**Symptoms:**
+- Error message "No file uploaded" even when a file is selected.
+- 500 internal server error on `/upload` endpoint.
+
+**Solutions:**
+- ✅ Check `client/src/services/api.js` - Ensure no manual `Content-Type` is set for `uploadReport` (let Axios handle the boundary).
+- ✅ Verify `uploads/reports` directory exists and has write permissions.
+- ✅ Check file size - System limit is 10MB by default.
+- ✅ Ensure `multer` is correctly configured in `middleware/upload.js`.
+- ✅ Verify `Report` model is not throwing validation errors (Check required fields).
+
+#### 6. Dark Mode Not Persisting
+
+**Symptoms:**
+- Dark mode resets on page refresh
+
+**Solutions:**
+- ✅ Check `tailwind.config.js` has `darkMode: 'class'`
+- ✅ Verify ThemeProvider wraps entire App
+- ✅ Check localStorage has 'darkMode' key
+- ✅ Clear browser cache and try again
+- ✅ Ensure ThemeContext is properly initialized
+
+#### 6. Profile Updates Not Working
+
+**Symptoms:**
+- Changes don't save or show in UI
+- Navbar doesn't update
+
+**Solutions:**
+- ✅ Verify backend is running on correct port
+- ✅ Check JWT token is valid (not expired)
+- ✅ Look at Network tab for API errors
+- ✅ Ensure `updateUser` function is called in Settings
+- ✅ Verify AuthContext provides updateUser
+- ✅ Check MongoDB connection is active
+
+#### 7. CORS Errors
+
+**Symptoms:**
+```
+Access to XMLHttpRequest blocked by CORS policy
+```
+
+**Solutions:**
+- ✅ Verify `cors()` middleware is used in `server.js`
+- ✅ Check frontend `VITE_API_URL` matches backend URL
+- ✅ In production, configure CORS with specific origins:
+```javascript
+app.use(cors({
+  origin: ['https://your-frontend.vercel.app'],
+  credentials: true
+}));
+```
+
+#### 8. Charts Not Rendering
+
+**Symptoms:**
+- Empty space where charts should be
+- Console errors about Recharts
+
+**Solutions:**
+- ✅ Ensure Recharts is installed: `
+
+## 🐛 Troubleshooting
+
+### Common Issues & Solutions
+
+#### 1. MongoDB Connection Failed
+
+**Symptoms:**
+```
+MongooseServerSelectionError: connect ETIMEDOUT
+```
+
+**Solutions:**
+- Check `MONGODB_URI` is correct
+- Verify network access in MongoDB Atlas (0.0.0.0/0)
+- Check database user credentials
+- Ensure cluster is running
+
+#### 2. Email Not Sending
+
+**Symptoms:**
+- Contact form submits but no email received
+- Error in server console
+
+**Solutions:**
+- Verify Gmail 2FA is enabled
+- Use App Password, not regular password
+- Check `EMAIL_USER` and `EMAIL_PASS` are correct
+- Test with different email service if needed
+
+#### 3. PDF Download Not Working
+
+**Symptoms:**
+- Click download but nothing happens
+- Error in browser console
+
+**Solutions:**
+- Check PDFKit is installed: `npm list pdfkit`
+- Verify backend route is correct
+- Check browser popup blocker
+- Look at server console for errors
+
+#### 4. Dark Mode Not Persisting
+
+**Symptoms:**
+- Dark mode resets on page refresh
+
+**Solutions:**
+- Check `tailwind.config.js` has `darkMode: 'class'`
+- Verify ThemeProvider wraps App component
+- Clear browser localStorage and try again
+- Check browser console for errors
+
+#### 5. Profile Updates Not Working
+
+**Symptoms:**
+- Changes don't save or show in UI
+
+**Solutions:**
+- Verify backend is running
+- Check token is valid (not expired)
+- Look at network tab for API errors
+- Ensure `updateUser` function is in AuthContext
+
+#### 6. CORS Errors
+
+**Symptoms:**
+```
+Access to XMLHttpRequest blocked by CORS policy
+```
+
+**Solutions:**
+- Verify `cors()` middleware in `server.js`
+- Check frontend API URL matches backend
+- In production, configure CORS with specific origins
+
+#### 7. Charts Not Rendering
+
+**Symptoms:**
+- Empty space where charts should be
+
+**Solutions:**
+- Ensure Recharts is installed: `npm list recharts`
+- Check data format matches chart requirements
+- Verify ResponsiveContainer has proper height
+- Look at browser console for errors
+
+---
+
+## 🧪 Testing Guide
+
+### Manual Testing Checklist
+
+#### Authentication
+- [ ] **Email/Password Signup**:
+  - [ ] Send OTP to email
+  - [ ] Verify OTP code
+  - [ ] Complete profile with all fields
+  - [ ] Sign up with duplicate email (should fail)
+  - [ ] Sign up with invalid OTP (should fail)
+  - [ ] Resend OTP functionality
+- [ ] **Google Sign-In**:
+  - [ ] Sign in with Google (new user)
+  - [ ] Complete profile (phone & organization)
+  - [ ] Sign in with Google (existing user)
+  - [ ] Profile picture displays correctly
+- [ ] **Login**:
+  - [ ] Login with email/password
+  - [ ] Login with Google
+  - [ ] Login with wrong credentials (should fail)
+- [ ] Access protected route without login (should redirect)
+- [ ] Logout successfully
+
+#### Profile Management
+- [ ] View profile in Settings
+- [ ] Update name
+- [ ] Update email
+- [ ] Update phone
+- [ ] Update organization
+- [ ] Verify navbar updates immediately
+- [ ] Refresh page - changes persist
+- [ ] Logout and login - changes persist
+
+#### Password Change
+- [ ] Change password with correct current password
+- [ ] Try wrong current password (should fail)
+- [ ] Try mismatched new passwords (should fail)
+- [ ] Try password under 6 characters (should fail)
+- [ ] Login with new password
+
+#### Dark Mode
+- [ ] Toggle dark mode on
+- [ ] Check all pages respect dark mode
+- [ ] Refresh page - dark mode persists
+- [ ] Toggle dark mode off
+- [ ] Check light mode restored
+
+#### Reports
+- [ ] Filter by report type
+- [ ] Filter by time period
+- [ ] Download PDF report
+- [ ] Verify PDF opens correctly
+- [ ] Check PDF formatting
+
+#### Contact Form
+- [ ] Fill all fields and submit
+- [ ] Check success message
+- [ ] Verify admin receives email
+- [ ] Verify user receives confirmation
+- [ ] Try submitting with empty fields (should fail)
+
+#### Dashboard
+- [ ] All metrics load correctly
+- [ ] Charts render properly
+- [ ] Sidebar navigation works
+- [ ] Recent updates show correct data from database
+- [ ] Mobile menu works on small screens
+- [ ] **Admin Features** (if admin user):
+  - [ ] Create new dashboard updates
+  - [ ] Update economic statistics
+  - [ ] Updates appear in real-time
+
+---
+
+## 🤝 Contributing
+
+### Development Workflow
+
+1. **Fork the repository**
+2. **Create feature branch**
+```bash
+git checkout -b feature/amazing-feature
+```
+3. **Make changes and commit**
+```bash
+git commit -m "Add amazing feature"
+```
+4. **Push to branch**
+```bash
+git push origin feature/amazing-feature
+```
+5. **Open Pull Request**
+
+# 🔐 Google OAuth & Email OTP Setup Guide
+
+## ✅ What's Been Added
+
+### 🎯 **New Features**
+
+1. **Google Sign-In Integration**
+   - One-click signup/login with Google
+   - Automatic profile creation from Google account
+   - Profile picture integration
+   - Email pre-verified for Google users
+
+2. **Email OTP Verification**
+   - 6-digit OTP sent to email
+   - OTP expires in 10 minutes
+   - Resend OTP functionality (60-second cooldown)
+   - Prevents dummy/fake email signups
+   - Beautiful HTML email templates
+
+3. **3-Step Signup Process**
+   - **Step 1**: Enter email → Send OTP
+   - **Step 2**: Verify OTP code
+   - **Step 3**: Complete profile (name, phone, org, password)
+
+4. **Profile Completion for Google Users**
+   - Google users need to add phone & organization
+   - Seamless profile completion flow
+   - Skip password (Google-authenticated)
+
+---
+
+## 📦 Installation
+
+### Backend Packages
+
+```bash
+cd server
+npm install passport passport-google-oauth20 express-session crypto
+```
+
+### Frontend Packages
+
+```bash
+cd client
+npm install @react-oauth/google jwt-decode
+```
+
+---
+
+## 🔧 Backend Setup
+
+### 1. Create New Files
+
+Create these files in your `server` folder:
+
+#### server/models/OTP.js
+```javascript
+// Copy from artifact: otp_model
+```
+
+#### server/controllers/otpController.js
+```javascript
+// Copy from artifact: otp_controller
+```
+
+#### server/controllers/googleAuthController.js
+```javascript
+// Copy from artifact: google_auth_controller
+```
+
+### 2. Update Existing Files
+
+#### server/models/User.js
+Add these fields to the user schema:
+```javascript
+googleId: {
+  type: String,
+  sparse: true,
+  unique: true
+},
+profilePicture: {
+  type: String
+},
+emailVerified: {
+  type: Boolean,
+  default: false
+}
+```
+
+Update password field:
+```javascript
+password: {
+  type: String,
+  required: function() {
+    return !this.googleId; // Password not required for Google users
+  },
+  minlength: 6,
+  select: false
+}
+```
+
+#### server/controllers/authController.js
+Update the signup function to check for verified OTP (see artifact)
+
+#### server/routes/auth.js
+Add new routes (see updated artifact)
+
+### 3. Update Environment Variables
+
+Add to `server/.env`:
+```env
+# Existing variables
+PORT=5000
+MONGODB_URI=your_mongodb_uri
+JWT_SECRET=your_jwt_secret
+NODE_ENV=development
+
+# Email Configuration (already exists)
+EMAIL_USER=your-email@gmail.com
+EMAIL_PASS=your-16-char-app-password
+ADMIN_EMAIL=admin@domain.com
+
+# Google OAuth Configuration (NEW)
+GOOGLE_CLIENT_ID=your_google_client_id.apps.googleusercontent.com
+GOOGLE_CLIENT_SECRET=your_google_client_secret
+```
+
+---
+
+## 🌐 Google OAuth Setup (Get Client ID & Secret)
+
+### Step 1: Go to Google Cloud Console
+
+1. Visit [Google Cloud Console](https://console.cloud.google.com/)
+2. Sign in with your Google account
+
+### Step 2: Create New Project
+
+1. Click on project dropdown (top left)
+2. Click "New Project"
+3. Name: "National Accounts Dashboard"
+4. Click "Create"
+
+### Step 3: Enable Google+ API
+
+1. Go to "APIs & Services" → "Library"
+2. Search for "Google+ API"
+3. Click "Enable"
+
+### Step 4: Create OAuth Credentials
+
+1. Go to "APIs & Services" → "Credentials"
+2. Click "Create Credentials" → "OAuth client ID"
+3. If prompted, configure OAuth consent screen first:
+
+   **OAuth Consent Screen:**
+   - User Type: External
+   - App name: National Accounts Dashboard
+   - User support email: your-email@gmail.com
+   - Developer contact: your-email@gmail.com
+   - Scopes: Add email, profile, openid
+   - Test users: Add your email
+   - Save and continue
+
+4. **Create OAuth Client ID:**
+   - Application type: Web application
+   - Name: National Accounts Dashboard Web
+   - Authorized JavaScript origins:
+     ```
+     http://localhost:3000
+     https://your-domain.vercel.app (for production)
+     ```
+   - Authorized redirect URIs:
+     ```
+     http://localhost:3000
+     https://your-domain.vercel.app (for production)
+     ```
+   - Click "Create"
+
+5. **Copy Credentials:**
+   - Copy "Client ID"
+   - Copy "Client Secret"
+
+### Step 5: Add to Environment Variables
+
+**Backend** (`server/.env`):
+```env
+GOOGLE_CLIENT_ID=123456789-abcdefgh.apps.googleusercontent.com
+GOOGLE_CLIENT_SECRET=GOCSPX-abc123def456
+```
+
+**Frontend** (`client/.env`):
+```env
+VITE_API_URL=http://localhost:5000/api
+VITE_GOOGLE_CLIENT_ID=123456789-abcdefgh.apps.googleusercontent.com
+```
+
+---
+
+## 📧 Gmail Setup (Already Done, But Here's Summary)
+
+### For OTP Email Sending:
+
+1. **Enable 2-Factor Authentication**
+   - Google Account → Security → 2-Step Verification
+
+2. **Generate App Password**
+   - Security → App passwords
+   - Select "Mail" and "Other"
+   - Copy 16-character password
+
+3. **Add to .env**
+   ```env
+   EMAIL_USER=your-email@gmail.com
+   EMAIL_PASS=abcd efgh ijkl mnop (16 chars)
+   ```
+
+---
+
+## 🗂️ File Structure (Updated)
+
+```
+server/
+├── models/
+│   ├── User.js (UPDATED - added googleId, profilePicture, emailVerified)
+│   └── OTP.js (NEW)
+├── controllers/
+│   ├── authController.js (UPDATED - signup now checks OTP)
+│   ├── otpController.js (NEW)
+│   └── googleAuthController.js (NEW)
+├── routes/
+│   └── auth.js (UPDATED - added OTP & Google routes)
+└── .env (UPDATED)
+
+client/
+├── src/
+│   ├── pages/
+│   │   ├── Signup.jsx (COMPLETELY REWRITTEN - 3-step process)
+│   │   ├── Login.jsx (UPDATED - added Google button)
+│   │   └── CompleteProfile.jsx (NEW)
+│   ├── services/
+│   │   └── api.js (UPDATED - added OTP & Google APIs)
+│   └── App.jsx (UPDATED - added /complete-profile route)
+└── .env (UPDATED)
+```
+
+---
+
+## 🧪 Testing the New Features
+
+### Test 1: Email OTP Signup
+
+1. **Start servers:**
+   ```bash
+   # Terminal 1
+   cd server && npm run dev
+   
+   # Terminal 2
+   cd client && npm run dev
+   ```
+
+2. **Go to signup page:** `http://localhost:3000/signup`
+
+3. **Step 1 - Enter Email:**
+   - Enter: test@example.com
+   - Click "Send OTP"
+   - ✅ Should see success message
+   - ✅ Check email for OTP
+
+4. **Step 2 - Verify OTP:**
+   - Enter 6-digit OTP from email
+   - Click "Verify OTP"
+   - ✅ Should proceed to step 3
+
+5. **Step 3 - Complete Profile:**
+   - Enter: Name, Phone, Organization, Password
+   - Click "Complete Registration"
+   - ✅ Should redirect to dashboard
+   - ✅ Should be logged in
+
+### Test 2: Google Sign-In (New User)
+
+1. **Go to signup page**
+
+2. **Click "Sign up with Google"**
+
+3. **Select Google account**
+   - ✅ Should redirect to complete-profile page
+
+4. **Complete profile:**
+   - Enter Phone & Organization
+   - Click "Complete Profile"
+   - ✅ Should redirect to dashboard
+   - ✅ Profile picture should show in navbar
+
+### Test 3: Google Sign-In (Existing User)
+
+1. **Logout**
+
+2. **Go to login page**
+
+3. **Click "Sign in with Google"**
+   - ✅ Should directly go to dashboard
+   - ✅ No profile completion needed
+
+### Test 4: OTP Features
+
+1. **Resend OTP:**
+   - Wait 60 seconds
+   - Click "Resend OTP"
+   - ✅ Should get new OTP in email
+   - ✅ Old OTP should be invalid
+
+2. **Expired OTP:**
+   - Wait 10+ minutes
+   - Try to verify old OTP
+   - ✅ Should show "OTP expired" error
+
+3. **Invalid OTP:**
+   - Enter wrong 6-digit code
+   - ✅ Should show "Invalid OTP" error
+
+---
+
+## 📱 User Flows
+
+### Flow 1: Regular Signup (Email + Password)
+
+```
+1. Enter email → Send OTP
+2. Check email → Copy OTP
+3. Enter OTP → Verify
+4. Enter name, phone, org, password
+5. Complete registration
+6. Redirect to dashboard
+```
+
+### Flow 2: Google Sign-In (New User)
+
+```
+1. Click "Sign in with Google"
+2. Select Google account
+3. Redirect to complete-profile
+4. Enter phone & organization
+5. Complete profile
+6. Redirect to dashboard
+```
+
+### Flow 3: Google Sign-In (Returning User)
+
+```
+1. Click "Sign in with Google"
+2. Select Google account
+3. Directly redirect to dashboard
+```
+
+---
+
+## 🔐 Security Features
+
+### 1. **OTP Security**
+- ✅ 6-digit random code
+- ✅ Expires in 10 minutes
+- ✅ One-time use only
+- ✅ Rate limited (1 per minute for resend)
+- ✅ Stored hashed in database
+- ✅ Auto-deleted after use
+
+### 2. **Email Validation**
+- ✅ Format validation
+- ✅ Uniqueness check
+- ✅ Prevents dummy emails
+- ✅ Must verify before signup
+
+### 3. **Google OAuth Security**
+- ✅ Secure token verification
+- ✅ Email pre-verified
+- ✅ Profile data validated
+- ✅ No password needed
+- ✅ Industry-standard OAuth 2.0
+
+### 4. **Password Security**
+- ✅ Minimum 6 characters
+- ✅ bcrypt hashing
+- ✅ Not required for Google users
+- ✅ Not stored for Google accounts
+
+---
+
+## 🎨 Email Templates
+
+### OTP Verification Email
+
+Features:
+- 📧 Beautiful HTML design
+- 🎨 Gradient header
+- 🔢 Large, clear OTP display
+- ⏰ Expiry time shown
+- ⚠️ Security warnings
+- 📱 Mobile responsive
+
+### New OTP (Resend) Email
+
+Features:
+- 🔄 Clear "resend" indication
+- ⚠️ Note about old OTPs being invalid
+- Same beautiful design
+
+---
+
+## ⚙️ Configuration Options
+
+### OTP Settings
+
+In `server/controllers/otpController.js`:
+
+```javascript
+// OTP expiry time (default: 10 minutes)
+expires: 600 // seconds
+
+// Resend cooldown (default: 60 seconds)
+if (timeSinceLastOTP < 60) { ... }
+
+// OTP digit length (default: 6)
+crypto.randomInt(100000, 999999)
+```
+
+### Email Settings
+
+In `server/controllers/otpController.js`:
+
+```javascript
+// Email service
+service: 'gmail' // or 'sendgrid', 'mailgun'
+
+// Email template customization
+html: `...` // Modify HTML template
+```
+
+---
+
+## 🚀 Production Deployment
+
+### Backend (Railway/Render)
+
+Add environment variables:
+```env
+GOOGLE_CLIENT_ID=prod_client_id.apps.googleusercontent.com
+GOOGLE_CLIENT_SECRET=prod_secret
+EMAIL_USER=production-email@gmail.com
+EMAIL_PASS=production-app-password
+```
+
+### Frontend (Vercel)
+
+Add environment variable:
+```env
+VITE_GOOGLE_CLIENT_ID=prod_client_id.apps.googleusercontent.com
+```
+
+### Update Google OAuth Console
+
+Add production URLs:
+- Authorized JavaScript origins: `https://your-app.vercel.app`
+- Authorized redirect URIs: `https://your-app.vercel.app`
+
+---
+
+## 🐛 Troubleshooting
+
+### Issue 1: Google Sign-In Button Not Showing
+
+**Problem**: No Google button appears
+
+**Solution**:
+- ✅ Check `VITE_GOOGLE_CLIENT_ID` in `client/.env`
+- ✅ Restart frontend dev server
+- ✅ Check browser console for errors
+- ✅ Verify Google Client ID is correct
+
+### Issue 2: OTP Email Not Received
+
+**Problem**: Email doesn't arrive
+
+**Solution**:
+- ✅ Check spam folder
+- ✅ Verify `EMAIL_USER` and `EMAIL_PASS` in `.env`
+- ✅ Ensure Gmail App Password is correct
+- ✅ Check server logs for email errors
+- ✅ Verify 2FA is enabled on Gmail
+
+### Issue 3: "Redirect URI Mismatch" Error
+
+**Problem**: Google OAuth redirect error
+
+**Solution**:
+- ✅ Check Google Cloud Console → Credentials
+- ✅ Ensure `http://localhost:3000` is in Authorized JavaScript origins
+- ✅ Wait 5 minutes for changes to propagate
+- ✅ Clear browser cache
+
+### Issue 4: OTP Expired Error
+
+**Problem**: Valid OTP shows as expired
+
+**Solution**:
+- ✅ Check server time is correct
+- ✅ OTP valid for 10 minutes only
+- ✅ Request new OTP
+- ✅ Check MongoDB TTL index is working
+
+### Issue 5: Google User Can't Complete Profile
+
+**Problem**: Redirect loop or error
+
+**Solution**:
+- ✅ Ensure JWT token is valid
+- ✅ Check `completeGoogleProfile` API endpoint
+- ✅ Verify phone & organization fields are sent
+- ✅ Check backend logs
+
+---
+
+## 📊 Database Schema Updates
+
+### User Model (Updated)
+
+```javascript
+{
+  name: String (required),
+  email: String (required, unique, lowercase),
+  password: String (required if !googleId),
+  phone: String (required after verification),
+  organization: String (required after verification),
+  googleId: String (unique, sparse),
+  profilePicture: String,
+  emailVerified: Boolean (default: false),
+  role: String (default: 'user'),
+  preferences: Object,
+  createdAt: Date
+}
+```
+
+### OTP Model (New)
+
+```javascript
+{
+  email: String (required, lowercase),
+  otp: String (required),
+  createdAt: Date (expires after 10 minutes),
+  verified: Boolean (default: false)
+}
+```
+
+---
+
+## ✅ Feature Checklist
+
+### Signup Features
+- [x] Email OTP verification
+- [x] 3-step signup process
+- [x] Resend OTP functionality
+- [x] OTP expiry (10 minutes)
+- [x] Rate limiting (60 seconds)
+- [x] Beautiful email templates
+- [x] Google Sign-In integration
+- [x] Profile completion for Google users
+- [x] Progress indicator
+- [x] Error handling
+
+### Security Features
+- [x] Email validation
+- [x] Prevents dummy emails
+- [x] OTP one-time use
+- [x] OTP auto-deletion
+- [x] Password hashing
+- [x] JWT authentication
+- [x] Google OAuth 2.0
+- [x] Session management
+
+### UI/UX Features
+- [x] Step-by-step wizard
+- [x] Progress bar
+- [x] Loading states
+- [x] Success/error messages
+- [x] Countdown timer for resend
+- [x] Mobile responsive
+- [x] Google button styling
+- [x] Profile picture display
+
+---
+
+## 🎉 Summary
+
+Your application now has **enterprise-grade authentication** with:
+
+✅ **Email OTP Verification** - No more fake/dummy emails  
+✅ **Google Sign-In** - One-click authentication  
+✅ **3-Step Signup** - Clean, guided process  
+✅ **Beautiful Emails** - Professional HTML templates  
+✅ **Security** - OTP expiry, rate limiting, validation  
+✅ **Profile Completion** - Seamless Google user onboarding  
+
+### Code Style
+
+- **JavaScript**: Use ES6+ features
+- **React**: Functional components with hooks
+- **CSS**: Tailwind utility classes
+- **Formatting**: Prettier recommended
+- **Naming**: camelCase for variables, PascalCase for components
+
+### Adding New Features
+
+1. Update backend routes if needed
+2. Create/update controllers
+3. Update User model if schema changes
+4. Create frontend components
+5. Update context if state management needed
+6. Add to navigation if new page
+7. Update README with new feature
+8. Test thoroughly before PR
+
+---
+
+## 📊 Project Statistics
+
+- **Total Files**: 45+
+- **Total Lines of Code**: 8000+
+- **Components**: 15+
+- **API Endpoints**: 8
+- **Pages**: 9
+- **Dependencies**: 25+
+
+---
+
+## 📜 License
+
+MIT License
+
+Copyright (c) 2024 National Accounts Dashboard
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---
+
+## 🙏 Acknowledgments
+
+- **MongoDB** for the excellent database service
+- **Vercel** for frontend hosting
+- **Railway/Render** for backend hosting
+- **Recharts** for beautiful chart components
+- **Lucide** for icon library
+- **Tailwind CSS** for utility-first CSS
+
+---
+
+## 📞 Support
+
+For support, email nationalacdashboard2025@gmail.com or create an issue in the repository.
+
+---
+
+## 🎯 Roadmap
+
+### Completed Features ✅
+- [x] Email OTP verification on signup
+- [x] Google OAuth 2.0 integration
+- [x] Admin dashboard for managing updates
+- [x] Dynamic data from MongoDB
+- [x] Real-time updates feed
+- [x] Profile completion flow
+- [x] Beautiful email templates
+
+### Upcoming Features
+- [ ] Real-time data integration with government APIs
+- [ ] Advanced data filtering and search
+- [ ] Export data to Excel/CSV
+- [ ] Enhanced user roles (Viewer, Analyst)
+- [ ] Two-factor authentication (SMS)
+- [ ] Password reset via email
+- [ ] Activity logs and audit trail
+- [ ] Custom dashboard widgets
+- [ ] Data comparison tools
+- [ ] Mobile app version
+- [ ] Multi-language support
+- [ ] Advanced analytics and predictions
+
+---
+
+## 🚀 Quick Start Commands
+
+```bash
+# Full setup
+git clone <repo>
+cd national-accounts-dashboard
+
+# Backend
+cd server
+npm install
+# Add .env file
+npm run dev
+
+# Frontend (new terminal)
+cd client
+npm install
+# Add .env file
+npm run dev
+
+# Visit http://localhost:3000
+```
+
+---
+
+**Built with ❤️ using MERN Stack**
+
+**Version**: 2.0.0  
+**Last Updated**: December 2025
+**Status**: Production Ready ✅
+
+**Recent Updates**:
+- ✅ Google OAuth Integration
+- ✅ Email OTP Verification
+- ✅ Admin Dashboard Features
+- ✅ Dynamic Data Management

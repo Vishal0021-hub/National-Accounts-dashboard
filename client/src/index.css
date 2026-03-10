@@ -1,0 +1,132 @@
+@import "tailwindcss";
+
+@import "@fontsource/inter";
+@import "@fontsource/outfit";
+
+@theme {
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  /* Font Families */
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-heading: "Outfit", system-ui, sans-serif;
+}
+
+:root {
+  /* Base Light Mode - Clean White/Slate */
+  --background: #ffffff;
+  --foreground: #020617; /* slate-950 */
+  
+  --card: #ffffff;
+  --card-foreground: #020617;
+  
+  --popover: #ffffff;
+  --popover-foreground: #020617;
+  
+  /* Primary: Emerald (ArthaVision Brand) */
+  --primary: #10b981; /* emerald-500 */
+  --primary-foreground: #ffffff;
+  
+  /* Secondary: Blue */
+  --secondary: #3b82f6; /* blue-500 */
+  --secondary-foreground: #ffffff;
+  
+  /* Muted/Neutral */
+  --muted: #f1f5f9; /* slate-100 */
+  --muted-foreground: #64748b; /* slate-500 */
+  
+  --accent: #facc15; /* yellow-400 */
+  --accent-foreground: #0f172a;
+  
+  --destructive: #ef4444; /* red-500 */
+  --destructive-foreground: #ffffff;
+
+  --border: #e2e8f0; /* slate-200 */
+  --input: #e2e8f0;
+  --ring: #10b981;
+  
+  --radius: 0.75rem;
+}
+
+/* Dark Mode - ArthaVision Dark Theme */
+.dark {
+  --background: #0f172a; /* slate-900 */
+  --foreground: #f8fafc; /* slate-50 */
+  
+  --card: #1e293b; /* slate-800 */
+  --card-foreground: #f8fafc;
+  
+  --popover: #1e293b;
+  --popover-foreground: #f8fafc;
+  
+  --primary: #34d399; /* emerald-400 (lighter for dark mode) */
+  --primary-foreground: #020617;
+  
+  --secondary: #60a5fa; /* blue-400 */
+  --secondary-foreground: #020617;
+  
+  --muted: #1e293b; /* slate-800 */
+  --muted-foreground: #94a3b8; /* slate-400 */
+  
+  --accent: #facc15;
+  --accent-foreground: #020617;
+  
+  --destructive: #f87171; /* red-400 */
+  --destructive-foreground: #020617;
+  
+  --border: #1e293b;
+  --input: #1e293b;
+  --ring: #34d399;
+}
+
+/* Base Resets & Typography */
+* {
+  border-color: var(--border);
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  letter-spacing: -0.025em;
+}
+
+/* Dark Mode Background Effect (Subtle Gradient from Original) */
+.dark body {
+  background-image: 
+    linear-gradient(to bottom, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.95)),
+    url('https://images.unsplash.com/photo-1557682250-5fd4bde04d48?auto=format&fit=crop&w=1800&q=80');
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+}
